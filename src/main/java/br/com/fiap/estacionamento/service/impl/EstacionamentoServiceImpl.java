@@ -6,6 +6,8 @@ import br.com.fiap.estacionamento.service.EstacionamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EstacionamentoServiceImpl implements EstacionamentoService {
 
@@ -25,6 +27,11 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
     @Override
     public Estacionamento buscarEstacionamentoPorCodigo(String codigo) throws Exception {
         return estacionamentoRepository.findById(codigo).orElseThrow(() -> new Exception("Estacionamento não encontrado"));
+    }
+
+    @Override
+    public List<Estacionamento> findAll() throws Exception {
+        return estacionamentoRepository.findAll();
     }
 
 

@@ -138,7 +138,18 @@ public class VagaServiceImpl implements VagaService {
         reservaVagaRepository.save(reservaVaga);
         estacionamentoRepository.save(estacionamento);
 
+        emitirNotaFiscal(reservaVaga);
+
         return reservaVaga;
+    }
+
+    public void emitirNotaFiscal(ReservaVaga reservaVaga) {
+        System.out.println("Nota fiscal emitida");
+    }
+
+    @Override
+    public List<ReservaVaga> obterReservas() throws Exception {
+        return reservaVagaRepository.findAll();
     }
 
     private ReservaVaga findReservaVaga(String idEstacionamento, String idCondutor, String idVaga) throws Exception {

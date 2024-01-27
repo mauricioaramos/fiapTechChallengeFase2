@@ -38,10 +38,6 @@ public class VerificarReservaServiceImpl implements VerificarReservaService {
 
             long duracaoEmMinutos = dataAtual.until(dataSaidaEstimada, ChronoUnit.MINUTES);
 
-            //long duracaoExtimadaEmMinutos = dataSaidaEstimada.until(LocalDateTime.now(), ChronoUnit.MINUTES);
-
-            //long duracaoAtualEmMinutos = reservaVaga.getDataEntrada().until(LocalDateTime.now(), ChronoUnit.MINUTES);
-
             if( duracaoEmMinutos <= minutosAntesDeVencer && duracaoEmMinutos > 0){
                 enviarNotificacao(reservaVaga.getTipoPeriodo());
                 reservaVagaRepository.save(reservaVaga);

@@ -3,6 +3,7 @@ version: '3.8'
 services:
   spring-app:
     build: .
+    restart: always
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/estacionamento
     ports:
@@ -12,6 +13,7 @@ services:
 
   mongodb:
     image: mongo:latest
+    restart: always
     ports:
       - '27017:27017'
     volumes:

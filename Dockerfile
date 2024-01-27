@@ -4,24 +4,29 @@ FROM amazoncorretto:17.0.7-alpine
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
-# Update and install OpenJDK
-#RUN apk update && apk  add 17-jdk-alpine
-
 # Set the working directory in the container
+#RUN rm -r app/
+# remove cache
+RUN rm -rf /var/cache/apk/*
+RUN rm -rf /app/*
+
 WORKDIR /app
-COPY . .
+
+
+# copy pom.xml and src folders to the container using workdir
+COPY pom.xml /app/pom.xml
+COPY src /app/src
+
+
 # Install Maven
 RUN apk --no-cache add maven
 
 
 RUN mvn clean install -DskipTests
 
-# Copy the application JAR file into the container at /app
-COPY  target/estacionamento-0.0.1-SNAPSHOT.jar /app/estacionamento-0.0.1-SNAPSHOT.jar
-
 # Expose the port your application runs on
 EXPOSE 8080
 
 # Run the application when the container starts
 
-CMD ["java", "-jar", "estacionamento-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/estacionamento-0.0.1-SNAPSHOT.jar"]

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/estacionamento")
 public class EstacionamentoController {
@@ -18,5 +20,10 @@ public class EstacionamentoController {
     @PostMapping
     public Estacionamento cadastrarEstacionamento(@RequestBody Estacionamento estacionamento) throws Exception {
         return estacionamentoService.cadastrarEstacionamento(estacionamento);
+    }
+
+    @RequestMapping()
+    public List<Estacionamento> listarEstacionamentos() throws Exception {
+        return estacionamentoService.findAll();
     }
 }

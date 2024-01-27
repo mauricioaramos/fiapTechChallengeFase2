@@ -15,6 +15,7 @@ public class CondutorController {
     CondutorService condutorService;
     @GetMapping
     public List<Condutor> obterTodos() throws Exception {
+        System.out.println("Obtendo todos os condutores");
         return condutorService.listarCondutores();
     }
 
