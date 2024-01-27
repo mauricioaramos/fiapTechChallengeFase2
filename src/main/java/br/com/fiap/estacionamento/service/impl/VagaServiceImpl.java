@@ -18,6 +18,7 @@ import java.util.List;
 @Service
 public class VagaServiceImpl implements VagaService {
 
+    private static final long TOLERANCIA_MINUTOS = 5;
     private final MongoTemplate mongoTemplate;
     @Autowired
     EstacionamentoRepository estacionamentoRepository;
@@ -173,7 +174,8 @@ public class VagaServiceImpl implements VagaService {
 
         long diferencaMinutos = dataEntrada.until(dataSaida, ChronoUnit.MINUTES);
         long diferencaEmHora = diferencaMinutos / 60;
-        if(diferencaMinutos % 60 != 0){
+        long minutosAMais = diferencaMinutos - (diferencaEmHora * 60);
+        if(diferencaMinutos % 60 != 0 && minutosAMais > TOLERANCIA_MINUTOS){
             diferencaEmHora += 1;
         }
         return reservaVaga.getValorHora() * diferencaEmHora;

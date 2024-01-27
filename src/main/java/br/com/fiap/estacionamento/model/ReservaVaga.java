@@ -27,5 +27,7 @@ public class ReservaVaga {
     private Double valorTotal;
     private String statusPagamento;
     private String tipoPeriodo;
+    private String duracao;
+    private String statusReserva;
 
 }
